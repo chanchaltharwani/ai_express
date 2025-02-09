@@ -22,7 +22,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     //initialize device size
     mq = MediaQuery.sizeOf(context);
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child:Text("Welcome to Home Screen")
       )
