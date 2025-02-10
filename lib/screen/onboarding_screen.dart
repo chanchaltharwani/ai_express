@@ -1,6 +1,7 @@
 import 'package:ai_express/model/onboard.dart';
 import 'package:ai_express/screen/HomeScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 import '../helper/global.dart';
@@ -89,7 +90,8 @@ class OnboardingScreen extends StatelessWidget {
                       onPressed: () {
 
                         if(isLast){
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Homescreen()));
+                          Get.off(()=>const Homescreen());
+                        //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Homescreen()));
 
 
                         }

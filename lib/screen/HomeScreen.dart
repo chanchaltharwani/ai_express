@@ -1,3 +1,4 @@
+import 'package:ai_express/helper/pref.dart';
 import 'package:ai_express/screen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +17,7 @@ class _HomescreenState extends State<Homescreen> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    Pref.showOnboarding = false;
   }
 
   @override

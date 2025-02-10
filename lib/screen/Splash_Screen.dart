@@ -1,8 +1,10 @@
 import 'package:ai_express/screen/HomeScreen.dart';
 import 'package:ai_express/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../helper/global.dart';
+import '../helper/pref.dart';
 import '../widget/Custome_Loading.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,8 +20,11 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     //wait for some time on splash & then move on next screen
     Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => OnboardingScreen()));
+      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+      //     builder: (_) =>
+      //         Pref.showOnboarding ? OnboardingScreen() : Homescreen()));
+
+      Get.off(()=>Pref.showOnboarding ? OnboardingScreen() : Homescreen());
     });
   }
 
@@ -30,25 +35,25 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: SizedBox(
         width: double.maxFinite,
-
         child: Column(
           children: [
-            Spacer(flex: 2,),
-            Card(
-                    shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Padding(
-            padding: EdgeInsets.all(mq.width * .05),
-            child: Image.asset(
-              "assets/images/ai_express_logo.png",
-              width: mq.width * .45,
+            Spacer(
+              flex: 2,
             ),
-                    ),
-                  ),
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Padding(
+                padding: EdgeInsets.all(mq.width * .05),
+                child: Image.asset(
+                  "assets/images/ai_express_logo.png",
+                  width: mq.width * .45,
+                ),
+              ),
+            ),
             Spacer(),
             CustomeLoading(),
             Spacer(),
-
           ],
         ),
       ),
