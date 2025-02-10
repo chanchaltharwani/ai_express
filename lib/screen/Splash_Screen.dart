@@ -1,4 +1,5 @@
 import 'package:ai_express/screen/HomeScreen.dart';
+import 'package:ai_express/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/global.dart';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //wait for some time on splash & then move on next screen
     Future.delayed(Duration(seconds: 2), () {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => Homescreen()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => OnboardingScreen()));
     });
   }
 
