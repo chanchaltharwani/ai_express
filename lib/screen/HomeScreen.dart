@@ -3,6 +3,7 @@ import 'package:ai_express/model/home_type.dart';
 import 'package:ai_express/widget/home_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../helper/global.dart';
 
 class Homescreen extends StatefulWidget {
@@ -52,7 +53,8 @@ class _HomescreenState extends State<Homescreen> {
               horizontal: mq.width * .04, vertical: mq.height * .015),
           child: ListView(
             children: HomeType.values.map((e) => HomeCard(homeType: e,)).toList(),
+          )
           ),
-        ));
+        );
   }
 }

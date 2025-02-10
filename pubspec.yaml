@@ -42,6 +42,8 @@ dependencies:
   #isar_flutter_libs: ^2.2.3
   # For state manangement
   get: ^4.6.5
+  #For Custome Animations
+  flutter_animate: ^4.5.2
 
   #for accessing storage path
   path_provider: ^2.1.0
