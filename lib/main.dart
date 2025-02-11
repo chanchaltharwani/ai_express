@@ -6,11 +6,12 @@ import 'package:get/get.dart';
 import 'helper/pref.dart';
 import 'screen/Splash_Screen.dart';
 
-void main()  async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Pref.initialize();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
@@ -19,11 +20,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      title: appName,
+    return GetMaterialApp(
+        title: appName,
         debugShowCheckedModeBanner: false,
-        home: SplashScreen()
-    );
+        theme: ThemeData(
+            appBarTheme: AppBarTheme(
+          centerTitle: true,
+          elevation: 1,
+          backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.blue),
+            titleTextStyle: TextStyle(
+                color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500),
+          ),
+        ),
+        home: SplashScreen());
   }
 }
-

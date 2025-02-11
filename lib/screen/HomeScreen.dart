@@ -27,7 +27,7 @@ class _HomescreenState extends State<Homescreen> {
     //initialize device size
     mq = MediaQuery.sizeOf(context);
 
-    Apis.getAnswer('Hiiii');
+    //Apis.getAnswer('Hiiii');
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -51,6 +51,9 @@ class _HomescreenState extends State<Homescreen> {
             )
           ],
         ),
+
+
+
         body: Padding(
           padding: EdgeInsets.symmetric(
               horizontal: mq.width * .04, vertical: mq.height * .015),
