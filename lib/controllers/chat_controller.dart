@@ -1,3 +1,4 @@
+import 'package:ai_express/helper/my_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +31,9 @@ class ChatController extends GetxController {
       list.add(Message(msg: res, msgType: MessageType.bot));
       _scrollDown();
       textC.text = "";
+    }
+    else{
+      MyDialog.info("Ask Something");
     }
 
   }
