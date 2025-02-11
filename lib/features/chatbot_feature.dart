@@ -66,6 +66,7 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
       body: Obx(
         ()=> ListView(
           physics:const  BouncingScrollPhysics(),
+          controller: _c.scrollC,
           padding: EdgeInsets.only(top: mq.height * .02,bottom: mq.height *.01),
           children: _c.list.map((e)=>MessageCard(message: e,)).toList(),
         ),
