@@ -1,5 +1,6 @@
 import 'package:ai_express/model/onboard.dart';
 import 'package:ai_express/screen/HomeScreen.dart';
+import 'package:ai_express/widget/custome_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -81,33 +82,21 @@ class OnboardingScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   //button
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          shape: const StadiumBorder(),
-                          elevation: 0,
-                          minimumSize: Size(mq.width * .5, 50)),
-                      onPressed: () {
+                  
+                  CustomeBtn(onTap: () {
 
-                        if(isLast){
-                          Get.off(()=>const Homescreen());
-                        //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Homescreen()));
+                    if(isLast){
+                      Get.off(()=>const Homescreen());
+                      //  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>Homescreen()));
 
 
-                        }
-                        else{
-                          c.nextPage(duration: Duration(microseconds: 1500), curve: Curves.ease);
-                        }
+                    }
+                    else{
+                      c.nextPage(duration: Duration(microseconds: 1500), curve: Curves.ease);
+                    }
 
-                      },
-                      child:  Text(
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                          isLast ? "Finish" : "Next"
-                      )
-                  ),
+                  }, text:  isLast ? "Finish" : "Next")
+                ,
                   const Spacer(flex: 2),
                 ],
               );
