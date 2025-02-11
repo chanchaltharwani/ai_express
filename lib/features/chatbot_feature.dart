@@ -1,6 +1,9 @@
+import 'package:ai_express/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChatbotFeature extends StatefulWidget {
+
   const ChatbotFeature({super.key});
 
   @override
@@ -8,6 +11,7 @@ class ChatbotFeature extends StatefulWidget {
 }
 
 class _ChatbotFeatureState extends State<ChatbotFeature> {
+  final _c = ChatController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +25,7 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
           children: [
             Expanded(
                 child: TextFormField(
+                  controller: _c.textC,
               textAlign: TextAlign.center,
               onTapOutside: (e) => FocusScope.of(context).unfocus,
               decoration: const InputDecoration(
@@ -36,7 +41,10 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
 
             //send button
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                _c.askQuestions();
+
+              },
               icon: CircleAvatar(
                 radius: 24,
                 backgroundColor: Colors.blue,
@@ -50,8 +58,10 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
           ],
         ),
       ),
-      body: ListView(
-        children: [],
+      body: Obx(
+        ()=> ListView(
+          children: _c.list.map((e)=>Text(e.msg)).toList(),
+        ),
       ),
     );
   }
