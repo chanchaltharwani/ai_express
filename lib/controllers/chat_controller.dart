@@ -1,22 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../apis/apis.dart';
 import '../model/message.dart';
 
 class ChatController extends GetxController {
   final textC = TextEditingController();
 
 
-  final list =  <Message>[].obs;
+  final list =  <Message>[Message(msg: "Hello , How i can help you? ", msgType: MessageType.bot)].obs;
 
-  void askQuestions(){
+  Future<void> askQuestions() async {
 
     if(textC.text.trim().isNotEmpty){
       //user
       list.add(Message(msg: textC.text, msgType: MessageType.user));
+      list.add(Message(msg: "Please wait....", msgType: MessageType.bot));
+        final res = await Apis.getAnswer(textC.text);
+
 
       //aibot
-      list.add(Message(msg: "I recived Your Message", msgType: MessageType.bot));
+      list.removeLast();
+      list.add(Message(msg: res, msgType: MessageType.bot));
       textC.text = "";
     }
 
