@@ -1,3 +1,4 @@
+import 'package:ai_express/apis/apis.dart';
 import 'package:ai_express/helper/pref.dart';
 import 'package:ai_express/model/home_type.dart';
 import 'package:ai_express/widget/home_card.dart';
@@ -25,6 +26,8 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     //initialize device size
     mq = MediaQuery.sizeOf(context);
+
+    Apis.getAnswer('Hiiii');
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
