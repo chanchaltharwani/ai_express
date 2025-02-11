@@ -1,6 +1,9 @@
 import 'package:ai_express/controllers/chat_controller.dart';
+import 'package:ai_express/widget/message_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../helper/global.dart';
 
 class ChatbotFeature extends StatefulWidget {
 
@@ -60,7 +63,8 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
       ),
       body: Obx(
         ()=> ListView(
-          children: _c.list.map((e)=>Text(e.msg)).toList(),
+          padding: EdgeInsets.only(top: mq.height * .02,bottom: mq.height *.01),
+          children: _c.list.map((e)=>MessageCard(message: e,)).toList(),
         ),
       ),
     );
