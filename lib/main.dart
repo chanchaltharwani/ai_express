@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         title: appName,
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.light,
+
+        themeMode: Pref.defaultTheme(),
+
         //dark
         darkTheme: ThemeData(
           brightness: Brightness.dark,
