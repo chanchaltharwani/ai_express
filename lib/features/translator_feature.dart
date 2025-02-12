@@ -1,8 +1,10 @@
 import 'package:ai_express/controllers/translate_controller.dart';
 import 'package:ai_express/helper/global.dart';
 import 'package:ai_express/widget/custome_btn.dart';
+import 'package:ai_express/widget/language_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TranslatorFeature extends StatefulWidget {
   const TranslatorFeature({super.key});
@@ -12,7 +14,7 @@ class TranslatorFeature extends StatefulWidget {
 }
 
 class _TranslatorFeatureState extends State<TranslatorFeature> {
-  final _c =  TranslateController();
+  final _controller =  TranslateController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,14 +32,18 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //from Language
-              Container(
-                height: 50,
-                width: mq.width * .4,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: const Text("Auto"),
+              InkWell(
+                onTap: () => Get.bottomSheet( LanguageSheet(c: _controller, s: _controller.from,)),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: Container(
+                  height: 50,
+                  width: mq.width * .4,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child:  Obx(()=>Text(_controller.from.isEmpty ? "Auto" : _controller.from.value )),
+                ),
               ),
 
               //swipe language  button
@@ -48,14 +54,18 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
               ),
 
               //to language
-              Container(
-                height: 50,
-                width: mq.width * .4,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: const Text("To"),
+              InkWell(
+                onTap: () => Get.bottomSheet( LanguageSheet(c: _controller, s: _controller.to,)),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                child: Container(
+                  height: 50,
+                  width: mq.width * .4,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child:  Obx(()=>Text(_controller.to.isEmpty ? "To" : _controller.to.value )),
+                ),
               ),
             ],
           ),
@@ -67,7 +77,7 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
               vertical: mq.height * .035,
             ),
             child: TextFormField(
-              controller: _c.textC,
+              controller: _controller.textC,
               minLines: 5,
               maxLines: null,
               onTapOutside: (e) => FocusScope.of(context).unfocus,
@@ -81,14 +91,14 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
 
           // //text field for output
 
-          if(_c.resultC.text.isNotEmpty)
+          if(_controller.resultC.text.isNotEmpty)
 
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: mq.width * .04,
             ),
             child: TextFormField(
-              controller: _c.resultC,
+              controller: _controller.resultC,
               //minLines: 5,
               maxLines: null,
               onTapOutside: (e) => FocusScope.of(context).unfocus,
