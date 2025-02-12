@@ -1,3 +1,4 @@
+import 'package:ai_express/main.dart';
 import 'package:ai_express/model/onboard.dart';
 import 'package:ai_express/screen/HomeScreen.dart';
 import 'package:ai_express/widget/custome_btn.dart';
@@ -57,8 +58,7 @@ class OnboardingScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 13.5,
-                          letterSpacing: .5,
-                          color: Colors.black54),
+                          letterSpacing: .5,color: Theme.of(context).lightTextColor),
                     ),
                   ),
                   //dots

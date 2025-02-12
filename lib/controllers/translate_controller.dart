@@ -224,7 +224,7 @@ class TranslateController extends GetxController {
 
   //
   void swapLanguages() {
-    if(to.isEmpty && from.isNotEmpty){
+    if (to.isEmpty && from.isNotEmpty) {
       final t = to.value;
       to.value = from.value;
       from.value = t;

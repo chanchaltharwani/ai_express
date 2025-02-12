@@ -30,13 +30,9 @@ class _HomescreenState extends State<Homescreen> {
     //Apis.getAnswer('Hiiii');
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          elevation: 1,
-          backgroundColor: Colors.white,
+
           title: const Text(
             appName,
-            style: TextStyle(
-                color: Colors.blue, fontSize: 20, fontWeight: FontWeight.w500),
           ),
           actions: [
             Padding(
@@ -46,7 +42,6 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Icon(
                     Icons.brightness_4_rounded,
                     size: 26,
-                    color: Colors.blue,
                   )),
             )
           ],
