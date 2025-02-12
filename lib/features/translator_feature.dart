@@ -1,4 +1,6 @@
+import 'package:ai_express/controllers/image_controller.dart';
 import 'package:ai_express/controllers/translate_controller.dart';
+import 'package:ai_express/features/custome_loading.dart';
 import 'package:ai_express/helper/global.dart';
 import 'package:ai_express/widget/custome_btn.dart';
 import 'package:ai_express/widget/language_sheet.dart';
@@ -14,7 +16,7 @@ class TranslatorFeature extends StatefulWidget {
 }
 
 class _TranslatorFeatureState extends State<TranslatorFeature> {
-  final _controller =  TranslateController();
+  final _controller = TranslateController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,10 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
             children: [
               //from Language
               InkWell(
-                onTap: () => Get.bottomSheet( LanguageSheet(c: _controller, s: _controller.from,)),
+                onTap: () => Get.bottomSheet(LanguageSheet(
+                  c: _controller,
+                  s: _controller.from,
+                )),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
                 child: Container(
                   height: 50,
@@ -42,20 +47,27 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
-                  child:  Obx(()=>Text(_controller.from.isEmpty ? "Auto" : _controller.from.value )),
+                  child: Obx(() => Text(_controller.from.isEmpty
+                      ? "Auto"
+                      : _controller.from.value)),
                 ),
               ),
 
               //swipe language  button
               IconButton(
-                onPressed: () {},
-                icon: const Icon(CupertinoIcons.repeat),
-                color: Colors.grey,
+                onPressed: () {
+                  _controller.swapLanguages();
+                },
+                icon:  Icon(CupertinoIcons.repeat),
+                color: _controller.to.isNotEmpty && _controller.from.isNotEmpty ? Colors.blue :  Colors.grey,
               ),
 
               //to language
               InkWell(
-                onTap: () => Get.bottomSheet( LanguageSheet(c: _controller, s: _controller.to,)),
+                onTap: () => Get.bottomSheet(LanguageSheet(
+                  c: _controller,
+                  s: _controller.to,
+                )),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
                 child: Container(
                   height: 50,
@@ -64,7 +76,8 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.blue),
                       borderRadius: BorderRadius.all(Radius.circular(15))),
-                  child:  Obx(()=>Text(_controller.to.isEmpty ? "To" : _controller.to.value )),
+                  child: Obx(() => Text(
+                      _controller.to.isEmpty ? "To" : _controller.to.value)),
                 ),
               ),
             ],
@@ -89,11 +102,26 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
             ),
           ),
 
-          // //text field for output
+          Obx(() => _translateResult()),
+          SizedBox(
+            height: mq.height * .04,
+          ),
 
-          if(_controller.resultC.text.isNotEmpty)
+          // translate button
+          CustomeBtn(
+              onTap: () {
+                _controller.translate();
+              },
+              text: 'Translate')
+        ],
+      ),
+    );
+  }
 
-          Padding(
+  //
+  Widget _translateResult() => switch (_controller.status.value) {
+        Status.none => SizedBox(),
+        Status.complete => Padding(
             padding: EdgeInsets.symmetric(
               horizontal: mq.width * .04,
             ),
@@ -107,14 +135,6 @@ class _TranslatorFeatureState extends State<TranslatorFeature> {
                       borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
           ),
-          SizedBox(
-            height: mq.height * .04,
-          ),
-
-          //button
-          CustomeBtn(onTap: () {}, text: 'Translate')
-        ],
-      ),
-    );
-  }
+        Status.loading => Align(child: const CustomeLoading()),
+      };
 }

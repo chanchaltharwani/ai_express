@@ -1,17 +1,16 @@
+import 'package:ai_express/apis/apis.dart';
+import 'package:ai_express/controllers/image_controller.dart';
 import 'package:ai_express/helper/my_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-
 class TranslateController extends GetxController {
-
   final textC = TextEditingController();
   final resultC = TextEditingController();
-
+  final status = Status.none.obs;
 
   final from = ''.obs;
   final to = ''.obs;
-
 
   //list of language available
   final lang = const [
@@ -199,13 +198,36 @@ class TranslateController extends GetxController {
     "Zulu"
   ];
 
-  Future<void> askQuestions() async {
-    if (textC.text.trim().isNotEmpty) {
-      // final res = await Apis.getAnswer(textC.text);
-
-      textC.text = "";
+  Future<void> translate() async {
+    if (textC.text.trim().isNotEmpty && to.isNotEmpty) {
+      status.value = Status.loading;
+      String prompt = '';
+      if (from.isNotEmpty) {
+        prompt =
+            'Can you translate given text from ${from.value}  to ${to.value} :\n ${textC.text}';
+      } else {
+        prompt =
+            'Can you translate given text to  ${to.value}  :\n ${textC.text}';
+      }
+      print(prompt);
+      final res = await Apis.getAnswer(prompt);
+      resultC.text = res;
+      status.value = Status.complete;
+      //textC.text = "";
     } else {
-      MyDialog.info("Ask Something");
+      status.value = Status.none;
+
+      if (to.isEmpty) MyDialog.info("Select To Language");
+      if (textC.text.isEmpty) MyDialog.info("Type Something to translate!");
+    }
+  }
+
+  //
+  void swapLanguages() {
+    if(to.isEmpty && from.isNotEmpty){
+      final t = to.value;
+      to.value = from.value;
+      from.value = t;
     }
   }
 }
