@@ -1,4 +1,5 @@
 import 'package:ai_express/controllers/image_controller.dart';
+import 'package:ai_express/main.dart';
 import 'package:ai_express/widget/custome_btn.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -23,23 +24,37 @@ class _ImageFeatureState extends State<ImageFeature> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Ai Image Creator"),
+
+        //share button
+        actions: [
+          Obx(()=>_c.status.value == Status.complete ?
+            IconButton(
+              color: Theme.of(context).buttonColor,
+                padding: EdgeInsets.only(right: 6),
+                onPressed: () {
+                  _c.shareImage();
+                }, icon: Icon(Icons.share)):SizedBox()
+          )
+        ],
       ),
 
       //download button
-      floatingActionButton:Obx(()=>_c.status.value == Status.complete  ?  Padding(
-        padding: EdgeInsets.only(right: 6, bottom: 6),
-        child: FloatingActionButton(
-          onPressed:_c.downloadImage,
-
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          child: const Icon(
-            Icons.save_alt_rounded,
-            size: 26,
-          ),
-        ),
-      ):SizedBox()),
+      floatingActionButton: Obx(() => _c.status.value == Status.complete
+          ? Padding(
+              padding: EdgeInsets.only(right: 6, bottom: 6),
+              child: FloatingActionButton(
+                backgroundColor: Theme.of(context).buttonColor,
+                onPressed: _c.downloadImage,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: const Icon(
+                  Icons.save_alt_rounded,
+                  size: 26,
+                ),
+              ),
+            )
+          : SizedBox()),
 
       body: ListView(
         physics: const BouncingScrollPhysics(),

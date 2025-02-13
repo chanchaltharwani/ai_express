@@ -53,6 +53,8 @@ dependencies:
   path_provider: ^2.1.0
   #FOR SAVING IMAGE in gallery
   gallery_saver_updated: ^3.0.0
+  #FOR sharing IMAGE
+  share_plus: ^10.1.4
 
   # For ai image generation
   dart_openai: ^5.1.0
