@@ -55,8 +55,8 @@ class _LanguageSheetState extends State<LanguageSheet> {
                 final List<String> list = search.isEmpty
                     ? widget.c.lang
                     : widget.c.lang
-                        .where((e) => e.toLowerCase().contains(search.value))
-                        .toList();
+                    .where((e) => e.toLowerCase().contains(search.value.toLowerCase()))
+                    .toList();
                 return ListView.builder(
                   physics: const BouncingScrollPhysics(),
                     itemCount: list.length,
