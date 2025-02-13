@@ -8,7 +8,7 @@ import 'screen/Splash_Screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Pref.initialize();
+  await Pref.initialize();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

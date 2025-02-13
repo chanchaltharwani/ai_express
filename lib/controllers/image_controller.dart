@@ -1,18 +1,41 @@
-import 'package:flutter/cupertino.dart';
+import 'package:ai_express/helper/my_dialog.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../apis/apis.dart';
+
+// Loading status enum
+enum Status { none, loading, complete }
+
 class ImageController extends GetxController {
   final textC = TextEditingController();
+  final status = Status.none.obs;
+  final url = ''.obs;
+  final imageList = <String>[].obs;
 
-  Future<void> askQuestions() async {
+  Future<void> searchAiImage() async {
+    String userInput = textC.text.trim();
+    print("User Input: '$userInput'"); // 🔹 Debugging ke liye print karo
 
-    if(textC.text.trim().isNotEmpty){
+    if (userInput.isNotEmpty) {
+      status.value = Status.loading;
 
-      textC.text = "";
+      // ✅ Pexels API se images fetch kar rahe hain
+      imageList.value = await Apis.searchImages(userInput);
+      print("API Response: $imageList"); // 🔹 API response print karo
+
+      if (imageList.isEmpty) {
+        MyDialog.error('No images found. Try a different keyword!');
+        status.value = Status.none;
+        return;
+      }
+
+      // ✅ Pehli image ka URL select karo
+      url.value = imageList.first;
+      print("Selected Image URL: ${url.value}"); // 🔹 Debugging ke liye
+
+      status.value = Status.complete;
+    } else {
+      MyDialog.info('Provide some beautiful image description');
     }
-
   }
-
-
-
-
 }

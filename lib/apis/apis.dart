@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'dart:convert';  // JSON encode/decode karne ke liye
-import 'dart:io';  // HTTP client aur networking ke liye
-import 'package:http/http.dart' as http;  // HTTP requests bhejne ke liye
+import 'dart:convert'; // JSON encode/decode karne ke liye
+import 'dart:io'; // HTTP client aur networking ke liye
+import 'package:http/http.dart' as http;
+import 'package:ai_express/helper/global.dart';
 import 'package:http/io_client.dart';
-
-import '../helper/global.dart';  // Secure HTTP requests handle karne ke liye
 
 class Apis {
   static Future<String> getAnswer(String question) async {
@@ -28,17 +27,15 @@ class Apis {
               ]
             }
           ],
-          "generationConfig": {
-            "temperature": 0,
-            "maxOutputTokens": 2000
-          }
+          "generationConfig": {"temperature": 0, "maxOutputTokens": 2000}
         }),
       );
 
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         print("data...:${data}");
-        String aiResponse = data["candidates"][0]["content"]["parts"][0]["text"];
+        String aiResponse =
+            data["candidates"][0]["content"]["parts"][0]["text"];
         return aiResponse;
       } else {
         print('Server Error: ${res.body}');
@@ -58,40 +55,34 @@ class Apis {
     }
   }
 
+  //image generation function
+  // 🔹 Pexels API ke liye updated function
+  static Future<List<String>> searchImages(String prompt) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            'https://api.pexels.com/v1/search?query=${Uri.encodeComponent(prompt)}&per_page=10'),
+        headers: {
+          HttpHeaders.authorizationHeader: imagekey, // ✅ API Key as Header
+        },
+      );
 
-  //
-// **Image generation function**
-//   static Future<String?> generateImage(String prompt) async {
-//     try {
-//       final response = await http.post(
-//         Uri.parse("https://api.openai.com/v1/images/generations"),
-//         headers: {
-//           "Authorization": "Bearer $imageApiKey",
-//           "Content-Type": "application/json",
-//         },
-//         body: jsonEncode({
-//           "model": "dall-e-2",
-//           "prompt": prompt,
-//           "n": 1,
-//           "size": "1024x1024",
-//         }),
-//       );
-//
-//       if (response.statusCode == 200) {
-//         final data = jsonDecode(response.body);
-//         print("Image Response Data: $data");
-//
-//         // ✅ Correct way to extract image URL
-//         return data["data"][0]["url"];
-//       } else {
-//         print("Server Error: ${response.body}");
-//         return null;
-//       }
-//     } catch (e) {
-//       print("Error: ${e.toString()}");
-//       return null;
-//     }
-//   }
+      if (response.statusCode != 200) {
+        print('Server Error: ${response.body}');
+        return [];
+      }
 
+      final data = jsonDecode(response.body);
+      print("API Response: $data"); // 🔹 Debugging ke liye
+
+      // ✅ Extracting Image URLs from "photos" list
+      return List.from(data['photos'])
+          .map((e) => e['src']['medium'].toString()) // ✅ medium size image
+          .toList();
+    } catch (e) {
+      print('searchImagesE: $e');
+      return [];
+    }
+  }
 
 }
