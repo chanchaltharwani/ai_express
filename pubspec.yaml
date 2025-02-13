@@ -55,6 +55,8 @@ dependencies:
   gallery_saver_updated: ^3.0.0
   #FOR sharing IMAGE
   share_plus: ^10.1.4
+  #App write databse (for dynamicall getting api key)
+  appwrite: ^14.0.0
 
   # For ai image generation
   dart_openai: ^5.1.0

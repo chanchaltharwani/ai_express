@@ -1,8 +1,8 @@
+import 'package:ai_express/main.dart';
 import 'package:ai_express/screen/HomeScreen.dart';
 import 'package:ai_express/screen/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../helper/global.dart';
 import '../helper/pref.dart';
 import '../widget/Custome_Loading.dart';
@@ -48,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Image.asset(
                   "assets/images/ai_express_logo.png",
                   width: mq.width * .45,
+                  color: Theme.of(context).buttonColor,
                 ),
               ),
             ),

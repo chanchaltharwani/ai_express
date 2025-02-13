@@ -1,3 +1,4 @@
+import 'package:ai_express/apis/app_write.dart';
 import 'package:ai_express/helper/global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,7 +9,10 @@ import 'screen/Splash_Screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Pref.initialize();
+  //appwrite
+  AppWrite.init();
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

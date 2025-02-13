@@ -8,7 +8,7 @@
 
 
     <application
-        android:label="Aii_Express"
+        android:label="Ai_Express"
         android:name="${applicationName}"
         android:requestLegacyExternalStorage ="true"
         android:icon="@mipmap/ic_launcher">
