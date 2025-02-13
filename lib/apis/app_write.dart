@@ -1,3 +1,4 @@
+import 'package:ai_express/helper/global.dart';
 import 'package:appwrite/appwrite.dart';
 
 class AppWrite {
@@ -25,9 +26,15 @@ class AppWrite {
       print("Gemini API Key: $geminiKey");
       print("Pexels API Key: $pexelsKey");
 
+      apiKey  = geminiKey ;
+      imagekey = pexelsKey;
+
+      print("Gemini API Key updated: $apiKey");
+      print("Pexels API Key updated : $imagekey");
+
       return {
-        'geminiKey': geminiKey,
-        'pexelsKey': pexelsKey,
+        'geminiKey': apiKey,
+        'pexelsKey': imagekey,
       };
     } catch (e) {
       print("Error fetching API keys: $e");
