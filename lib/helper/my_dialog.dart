@@ -1,3 +1,4 @@
+import 'package:ai_express/features/custome_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,4 +25,9 @@ class MyDialog {
         backgroundColor: Colors.red.withOpacity(.8),
         colorText: Colors.white);
   }
+
+  //loading dialog
+    static void showLoadingDialog(){
+    Get.dialog(const Center(child: CustomeLoading()));
+    }
 }

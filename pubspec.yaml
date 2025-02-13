@@ -51,6 +51,8 @@ dependencies:
   http: ^1.2.2
   #for accessing storage path
   path_provider: ^2.1.0
+  #FOR SAVING IMAGE in gallery
+  gallery_saver_updated: ^3.0.0
 
   # For ai image generation
   dart_openai: ^5.1.0

@@ -1,8 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
+
+<!--    for storage Access-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
+
+
     <application
         android:label="Aii_Express"
         android:name="${applicationName}"
+        android:requestLegacyExternalStorage ="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

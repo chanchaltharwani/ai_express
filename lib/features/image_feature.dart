@@ -24,6 +24,23 @@ class _ImageFeatureState extends State<ImageFeature> {
       appBar: AppBar(
         title: Text("Ai Image Creator"),
       ),
+
+      //download button
+      floatingActionButton:Obx(()=>_c.status.value == Status.complete  ?  Padding(
+        padding: EdgeInsets.only(right: 6, bottom: 6),
+        child: FloatingActionButton(
+          onPressed:_c.downloadImage,
+
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: const Icon(
+            Icons.save_alt_rounded,
+            size: 26,
+          ),
+        ),
+      ):SizedBox()),
+
       body: ListView(
         physics: const BouncingScrollPhysics(),
         padding: EdgeInsets.only(
@@ -58,29 +75,35 @@ class _ImageFeatureState extends State<ImageFeature> {
           ),
 
           //horizon tal scrool
-          Obx(()=>  _c.imageList.isEmpty ? SizedBox() : SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(bottom: mq.height * .03),
-            physics: BouncingScrollPhysics(),
-            child: Wrap(
-              spacing: 10,
-              children: _c.imageList
-                  .map((e) => InkWell(
-                onTap: (){
-                  _c.url.value = e;
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  child: CachedNetworkImage(
-                    imageUrl: e,
-                    height: 100,
-                    errorWidget: (context, url, error) => const SizedBox(),
+          Obx(
+            () => _c.imageList.isEmpty
+                ? SizedBox()
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.only(bottom: mq.height * .03),
+                    physics: BouncingScrollPhysics(),
+                    child: Wrap(
+                      spacing: 10,
+                      children: _c.imageList
+                          .map((e) => InkWell(
+                                onTap: () {
+                                  _c.url.value = e;
+                                },
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  child: CachedNetworkImage(
+                                    imageUrl: e,
+                                    height: 100,
+                                    errorWidget: (context, url, error) =>
+                                        const SizedBox(),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    ),
                   ),
-                ),
-              ))
-                  .toList(),
-            ),
-          ),  ),
+          ),
           //crete button
           CustomeBtn(
               onTap: () {

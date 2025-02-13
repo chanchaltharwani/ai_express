@@ -1,5 +1,7 @@
+import 'package:ai_express/helper/global.dart';
 import 'package:ai_express/helper/my_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver_updated/gallery_saver.dart';
 import 'package:get/get.dart';
 import '../apis/apis.dart';
 
@@ -38,4 +40,20 @@ class ImageController extends GetxController {
       MyDialog.info('Provide some beautiful image description');
     }
   }
+
+  //
+  void downloadImage() async {
+    try {
+      MyDialog.showLoadingDialog();
+      await GallerySaver.saveImage(url.toString(),albumName: appName).then((success) {
+        //
+        Get.back();
+        MyDialog.success("Image Download To Gallery");
+      });
+    } catch (e) {
+      Get.back();
+      print("downloadImageE :$e");
+    }
+  }
+
 }
