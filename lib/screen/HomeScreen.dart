@@ -47,9 +47,10 @@ class _HomescreenState extends State<Homescreen> {
                   Pref.isDarkMode = _isDarkMode.value;
                 },
                 icon: Obx(
-                ()=> Icon(
-                  _isDarkMode.value  ? Icons.brightness_2_rounded:
-                    Icons.brightness_5_rounded,
+                  () => Icon(
+                    _isDarkMode.value
+                        ? Icons.brightness_2_rounded
+                        : Icons.brightness_5_rounded,
                     size: 26,
                   ),
                 )),
