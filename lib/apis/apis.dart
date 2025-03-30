@@ -15,13 +15,15 @@ class Apis {
 
       final res = await ioClient.post(
         Uri.parse(
-            'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBmLOe-h9fMN8b6k_0MeBVRvnxoWSreZTY'),
+            'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=AIzaSyBmLOe-h9fMN8b6k_0MeBVRvnxoWSreZTY')
+        ,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
         body: jsonEncode({
           "contents": [
             {
+              "role": "user",
               "parts": [
                 {"text": question}
               ]
@@ -35,14 +37,13 @@ class Apis {
         final data = jsonDecode(res.body);
         print("data...:${data}");
         String aiResponse =
-            data["candidates"][0]["content"]["parts"][0]["text"];
+        data["candidates"][0]["content"]["parts"][0]["text"];
         return aiResponse;
       } else {
         print('Server Error: ${res.body}');
         return "Server Error: Failed to fetch response";
       }
     } catch (e) {
-      // Different types of errors handle karenge
       if (e is SocketException) {
         return "No Internet Connection. Please check your network.";
       } else if (e is TimeoutException) {
@@ -54,6 +55,7 @@ class Apis {
       }
     }
   }
+
 
   //image generation function
   // 🔹 Pexels API ke liye updated function
@@ -82,6 +84,19 @@ class Apis {
     } catch (e) {
       print('searchImagesE: $e');
       return [];
+    }
+  }
+
+//updated api end point check karne k liye method in future agar api end point chnage hua to usko hum api k url m update
+  static Future<void> fetchModels() async {
+    try {
+      final response = await http.get(
+        Uri.parse("https://generativelanguage.googleapis.com/v1/models?key=AIzaSyBmLOe-h9fMN8b6k_0MeBVRvnxoWSreZTY"),
+      );
+
+      print("Response Body: ${response.body}");
+    } catch (e) {
+      print("Error: $e");
     }
   }
 

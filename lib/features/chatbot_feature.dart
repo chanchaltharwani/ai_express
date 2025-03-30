@@ -3,6 +3,7 @@ import 'package:ai_express/main.dart';
 import 'package:ai_express/widget/message_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../apis/apis.dart';
 import '../helper/global.dart';
 
 class ChatbotFeature extends StatefulWidget {
@@ -48,6 +49,7 @@ class _ChatbotFeatureState extends State<ChatbotFeature> {
             IconButton(
               onPressed: () {
                 _c.askQuestions();
+               // Apis.fetchModels();
 
               },
               icon: CircleAvatar(

@@ -38,6 +38,7 @@ class ChatController extends GetxController {
 
   }
 
+
   // for moving to end message
 void _scrollDown(){
     scrollC.animateTo(scrollC.position.maxScrollExtent, duration: Duration(microseconds: 500), curve: Curves.ease);
