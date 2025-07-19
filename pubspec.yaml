@@ -62,8 +62,10 @@ dependencies:
   dart_openai: ^5.1.0
   cached_network_image: ^3.4.1
 dev_dependencies:
+  flutter_launcher_icons: "^0.13.1"
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -73,6 +75,9 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   #for changing app icon
   icons_launcher: ^3.0.0
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -84,6 +89,12 @@ flutter:
   assets:
     - assets/images/
     - assets/lottie/
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/ai_express_logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/ai_express_logo.png"
 
 
 

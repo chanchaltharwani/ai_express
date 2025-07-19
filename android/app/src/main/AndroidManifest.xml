@@ -4,9 +4,6 @@
 <!--    for storage Access-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-
-
-
     <application
         android:label="Ai_Express"
         android:name="${applicationName}"

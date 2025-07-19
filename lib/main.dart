@@ -13,6 +13,7 @@ void main() async {
   await Pref.initialize();
   //appwrite
   AppWrite.init();
+  // for full screens and landscape mode
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
